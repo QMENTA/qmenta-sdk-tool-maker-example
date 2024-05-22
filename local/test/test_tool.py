@@ -26,19 +26,15 @@ class TestTool(unittest.TestCase):
                         # Relative paths to the input data stored in the sample_data folder
                         TestFileInput(
                             path="T1.nii.gz",
-                            file_filter_condition_name="condition_t1_brain",
+                            file_filter_condition_name="c_t1",
                             modality=Modality.T1,
-                            tags=[Tag("brain")],
                             mandatory=1
                         )
                     ],
                     "mandatory": 1,
                 },
-                "some_string": "hello",
-                "some_integer": 2,
-                "one_choice": "a",
-                "multi_choice": ["b", "c"],
-                "some_decimal": 3.52,
+                "hist_start": 50,
+                "hist_end": 400,
             },
             overwrite_settings=True,  # True if you want to overwrite settings.json
             refresh_test_data=True  # True will remove all data from previous test
