@@ -1,0 +1,35 @@
+[
+  {
+    "id": "input",
+    "type": "container",
+    "file_filter": "c_T1[1,1](m'T1')",
+    "title": "T1 weighted image",
+    "info": "Describe here what is the expected input, this will appear in the tool UI.",
+    "in_filter": [
+      "mri_brain_data"
+    ],
+    "out_filter": [
+      "freesurfer_v5",
+      "freesurfer_v6"
+    ],
+    "anchor": 1,
+    "batch": 1,
+    "mandatory": 1
+  },
+  {
+    "id": "hist_start",
+    "type": "decimal",
+    "title": "From",
+    "default": 50,
+    "min": 20,
+    "max": 200
+  },
+  {
+    "id": "hist_end",
+    "type": "decimal",
+    "title": "To",
+    "default": 400,
+    "min": 250,
+    "max": 500
+  }
+]
