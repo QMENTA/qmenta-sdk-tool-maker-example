@@ -1,17 +1,19 @@
 
 import matplotlib
 import matplotlib.pyplot as plt
+import nibabel as nib
 import logging
 import numpy as np
 import os
 
-from subprocess import call
 
+from qmenta.imaging.interfaces.utils.shell import exeggcutor
 from qmenta.imaging.processing.report_utils.report_tools import (
     generate_pdf_report, generate_online_report
 )
 from qmenta.report.html_snippets.build_html_tables import (
-    table_double_header_and_images
+    table_double_header_and_images,
+    add_text_header_online
 )
 from qmenta.sdk.tool_maker.outputs import (
     Coloring,
@@ -30,7 +32,7 @@ from qmenta.sdk.tool_maker.tool_maker import InputFile, Tool, FilterFile
 matplotlib.use('Agg')
 
 
-class MockTool(Tool):
+class QmentaSdkToolMakerExample(Tool):
     def tool_inputs(self):
         """
         Define the inputs for the tool. This is used to create the settings.json file.
@@ -87,7 +89,6 @@ class MockTool(Tool):
         # Downloads all the files and populate the variable self.inputs with the handlers and parameters
         context.set_progress(message="Downloading input data and setting self.inputs object")
         self.prepare_inputs(context, logger)
-        analysis_data = context.fetch_analysis_data()
         # Input handlers are built as simplenamespaces, each attribute is the "id" defined in each InputFile
         # THESE ARE LISTS, each element has the methods to get modality, tags, file_info
         schema_file = self.inputs.input.c_T1
@@ -120,40 +121,30 @@ class MockTool(Tool):
         # ================##
         # YOUR CODE HERE
         context.set_progress(message="Processing...")
-        t1_path = os.path.join(out_folder, "T1_final.nii.gz")
-        histogram_data_path = '/root/hist.txt'
-        call([
-            "/usr/lib/mrtrix/bin/mrstats",
-            "-histogram", histogram_data_path,
-            "-bins", "50",
-            t1_path
-        ])
+        t1_path = schema_file_path
+        hist_vect = nib.load(t1_path).get_fdata().flatten()
+        hist_vect[hist_vect == 0] = np.nan
         # Plot the histogram for the selected range of intensities
-        [bins_centers, values] = np.loadtxt(histogram_data_path)
-
-        _, ax = plt.subplots()
+        fig, ax = plt.subplots()
         ax.set_title("T1 Histogram (for intensities between 50 and 400)")
         ax.set_ylabel("Number of voxels")
         ax.grid(color="#CCCCCC", linestyle="--", linewidth=1)
 
-        left_i = next(i for i,v in enumerate(bins_centers) if v > hist_start)
-        right_i = max((i for i,v in enumerate(bins_centers) if v < hist_end))
-
-        plt.plot(bins_centers[left_i:right_i], values[left_i:right_i])
+        ax.hist(hist_vect, bins=np.arange(hist_start, hist_end, 50))
 
         hist_path = os.path.join(working_dir, "hist.png")
-        plt.savefig(hist_path)
-        self.upload_output_file(
-            context=context,
+        fig.savefig(hist_path)
+        context.upload_file(
             source_file_path=hist_path,  # path to the output file in Docker container
             destination_path="hist.png",  # path of the file saved in the output container in the platform
         )
         # Generate an example report
         # Since it is a head-less machine, it requires Xvfb to generate the pdf
         context.set_progress(message="Creating report...")
-        html_content = table_double_header_and_images(
+        html_content = add_text_header_online(title="Qmenta sdk tool maker example", htag="h1")
+        html_content += table_double_header_and_images(
             [hist_path],
-            ["axial", "coronal", "sagittal"],
+            [""],
             subtitle_alignment="center",
             title="histogram",
             type_colors="primary",
@@ -166,34 +157,30 @@ class MockTool(Tool):
         html_content_online = html_content.replace(os.path.dirname(hist_path) + "/", "")
         generate_online_report(report_online_contents=html_content_online,
                                report_path=report_path)
-        generate_online_report()
-        self.upload_output_file(
-            context=context,
+        context.upload_file(
             source_file_path=report_path,  # path to the output file in Docker container
             destination_path=os.path.basename(report_path),  # path of the file saved in the output container in the platform
             tags={"report"}
         )
-        report_path = os.path.join(working_dir, "report.pdf")
-        html_content_pdf = generate_pdf_report(
-            report_contents=html_content,
-            analysis_data=analysis_data,
-            analysis_title="Histogram report v1.0",  # limit 32 characters
-            report_path=report_path,
-        )
-        self.upload_output_file(
-            context=context,
-            source_file_path=report_path,  # path to the output file in Docker container
-            destination_path=os.path.basename(report_path),  # path of the file saved in the output container in the platform
-        )
-        # DEBUG
-        with open(os.path.join(out_folder, "report_pdf.html"), "w") as f1:
-            f1.write(html_content_pdf)
+        # report_path = os.path.join(working_dir, "report.pdf")
+        # html_content_pdf = generate_pdf_report(
+        #     report_contents=html_content,
+        #     analysis_data=analysis_data,
+        #     analysis_title="Histogram report v1.0",  # limit 32 characters
+        #     report_path=report_path,
+        # )
+        # context.upload_file(
+        #     source_file_path=report_path,  # path to the output file in Docker container
+        #     destination_path=os.path.basename(report_path),  # path of the file saved in the output container in the platform
+        # )
+        # # DEBUG
+        # with open(os.path.join(out_folder, "report_pdf.html"), "w") as f1:
+        #     f1.write(html_content_pdf)
         # ================##
 
         # PREPARE AND UPLOAD YOUR RESULTS Example:
         context.set_progress(message="Uploading result")
-        self.upload_output_file(
-            context=context,
+        context.upload_file(
             source_file_path=t1_path,  # path to the output file in Docker container
             destination_path="T1_final.nii.gz",  # path of the file saved in the output container in the platform
             modality=str(Modality.DTI),  # modality that will be set for that file
@@ -237,5 +224,5 @@ class MockTool(Tool):
         )
 
 def run(context):
-    MockTool().tool_outputs()  # this can be removed if no results configuration file needs to be generated.
-    MockTool().run(context)
+    QmentaSdkToolMakerExample().tool_outputs()  # this can be removed if no results configuration file needs to be generated.
+    QmentaSdkToolMakerExample().run(context)

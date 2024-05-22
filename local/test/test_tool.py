@@ -6,7 +6,7 @@ from qmenta.sdk.tool_maker.context import TestFileInput
 from qmenta.sdk.tool_maker.modalities import Modality, Tag
 import sys
 sys.path.append("local_tools")
-from mock_tool.tool import MockTool
+from qmenta_sdk_tool_maker_example.tool import QmentaSdkToolMakerExample
 
 
 class TestTool(unittest.TestCase):
@@ -16,17 +16,17 @@ class TestTool(unittest.TestCase):
 
     def test_basic_call(self):
         """A basic test call"""
-        os.environ["WORKDIR"] = os.path.join("local_tools/mock_tool/local/test/test_basic_call/execution_folder")
-        MockTool().test_with_args(
+        os.environ["WORKDIR"] = os.path.join("local_tools/qmenta_sdk_tool_maker_example/local/test/test_basic_call/execution_folder")
+        QmentaSdkToolMakerExample().test_with_args(
             in_args={
                 "test_name": inspect.getframeinfo(inspect.currentframe()).function,  # returns function name
                 "sample_data_folder": "sample_data",  # Name of the folder where the test data is stored
-                "input_data": {
+                "input": {
                     "files": [
                         # Relative paths to the input data stored in the sample_data folder
                         TestFileInput(
                             path="T1.nii.gz",
-                            file_filter_condition_name="c_t1",
+                            file_filter_condition_name="c_T1",
                             modality=Modality.T1,
                             mandatory=1
                         )
@@ -54,12 +54,12 @@ class TestToolDocker(unittest.TestCase):
     username/tool_name:version
 
     Push the image:
-    docker push username/mock_tool:1.0
+    docker push username/qmenta_sdk_tool_maker_example:1.0
     """
 
     def test_basic_call(self):
         """A basic test call"""
-        MockTool().test_docker_with_args(
+        QmentaSdkToolMakerExample().test_docker_with_args(
             in_args={
                 "test_name": inspect.getframeinfo(inspect.currentframe()).function,  # returns function name
             },
