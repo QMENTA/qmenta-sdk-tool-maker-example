@@ -1,0 +1,5 @@
+This is the execution log --> Starting context.
+Tool starting
+Input file data.Path : /home/vicente/bitmenta/qmenta_sdk_tool_maker_example/local/test/test_basic_call/execution_folder/input_folder/input/T1.nii.gzModality: T1Tags: set()INFO: {}
+histogram start : 50.0
+Parameter decimal : 400.0

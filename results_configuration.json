@@ -1,0 +1,24 @@
+{
+  "screen": {
+    "type": "tool",
+    "tool": "papaya",
+    "region": "center",
+    "width": "50%",
+    "load_element": 1
+  },
+  "tools": [
+    {
+      "type": "tool",
+      "tool_code": "papaya",
+      "config": {
+        "images": [
+          {
+            "file": "T1_final.nii.gz",
+            "coloring": "Grayscale"
+          }
+        ],
+        "title": "Tissue segmentation over T1"
+      }
+    }
+  ]
+}

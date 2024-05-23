@@ -1,0 +1,13 @@
+{
+  "test_name": "test_basic_call",
+  "sample_data_folder": "sample_data",
+  "input": [
+    {
+      "path": "T1.nii.gz",
+      "modality": "T1",
+      "file_filter_condition_name": "c_T1"
+    }
+  ],
+  "hist_start": 50,
+  "hist_end": 400
+}

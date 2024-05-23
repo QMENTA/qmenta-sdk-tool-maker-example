@@ -1,0 +1,8 @@
+# Python requirements for tool:
+# Ex: matplotlib==3.4.2
+qmenta-sdk-lib==1.15dev3352
+matplotlib
+numpy
+nibabel
+pdfkit
+tornado
