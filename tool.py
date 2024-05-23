@@ -5,16 +5,10 @@ import nibabel as nib
 import logging
 import numpy as np
 import os
+import pdfkit
+from time import gmtime, strftime
+from tornado import template
 
-
-from qmenta.imaging.interfaces.utils.shell import exeggcutor
-from qmenta.imaging.processing.report_utils.report_tools import (
-    generate_pdf_report, generate_online_report
-)
-from qmenta.report.html_snippets.build_html_tables import (
-    table_double_header_and_images,
-    add_text_header_online
-)
 from qmenta.sdk.tool_maker.outputs import (
     Coloring,
     HtmlInject,
@@ -88,6 +82,7 @@ class QmentaSdkToolMakerExample(Tool):
 
         # Downloads all the files and populate the variable self.inputs with the handlers and parameters
         context.set_progress(message="Downloading input data and setting self.inputs object")
+        analysis_data = context.fetch_analysis_data()
         self.prepare_inputs(context, logger)
         # Input handlers are built as simplenamespaces, each attribute is the "id" defined in each InputFile
         # THESE ARE LISTS, each element has the methods to get modality, tags, file_info
@@ -132,7 +127,7 @@ class QmentaSdkToolMakerExample(Tool):
 
         ax.hist(hist_vect, bins=np.arange(hist_start, hist_end, 50))
 
-        hist_path = os.path.join(working_dir, "hist.png")
+        hist_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "hist.png")
         fig.savefig(hist_path)
         context.upload_file(
             source_file_path=hist_path,  # path to the output file in Docker container
@@ -141,41 +136,28 @@ class QmentaSdkToolMakerExample(Tool):
         # Generate an example report
         # Since it is a head-less machine, it requires Xvfb to generate the pdf
         context.set_progress(message="Creating report...")
-        html_content = add_text_header_online(title="Qmenta sdk tool maker example", htag="h1")
-        html_content += table_double_header_and_images(
-            [hist_path],
-            [""],
-            subtitle_alignment="center",
-            title="histogram",
-            type_colors="primary",
-            caption="Fifth table comparison with primary colors and images",
-        )
-        report_path = os.path.join(working_dir, "online_report.html")
-        # Here all the images have the full path, is important that before
-        # upload you rename them to the relative path
-        # inside the output container
-        html_content_online = html_content.replace(os.path.dirname(hist_path) + "/", "")
-        generate_online_report(report_online_contents=html_content_online,
-                               report_path=report_path)
+        report_path = os.path.join(working_dir, "report.pdf")
+        data_report = {
+            "logo_main": "/root/qmenta_logo.png",
+            "ss": analysis_data["patient_secret_name"],
+            "ssid": analysis_data["ssid"],
+            "histogram": hist_path,
+            "this_moment": strftime("%Y-%m-%d %H:%M:%S", gmtime()),
+            "version": 1.0
+        }
+
+        loader = template.Loader(os.path.dirname(os.path.realpath(__file__)))
+        report_contents = loader.load("report_template.html").generate(data_report=data_report)
+
+        if isinstance(report_contents, bytes):
+            report_contents = report_contents.decode("utf-8")
+        pdfkit.from_string(report_contents, report_path, options={"enable-local-file-access": ""})
+        context.set_progress(message="Uploading results...")
         context.upload_file(
             source_file_path=report_path,  # path to the output file in Docker container
             destination_path=os.path.basename(report_path),  # path of the file saved in the output container in the platform
             tags={"report"}
         )
-        # report_path = os.path.join(working_dir, "report.pdf")
-        # html_content_pdf = generate_pdf_report(
-        #     report_contents=html_content,
-        #     analysis_data=analysis_data,
-        #     analysis_title="Histogram report v1.0",  # limit 32 characters
-        #     report_path=report_path,
-        # )
-        # context.upload_file(
-        #     source_file_path=report_path,  # path to the output file in Docker container
-        #     destination_path=os.path.basename(report_path),  # path of the file saved in the output container in the platform
-        # )
-        # # DEBUG
-        # with open(os.path.join(out_folder, "report_pdf.html"), "w") as f1:
-        #     f1.write(html_content_pdf)
         # ================##
 
         # PREPARE AND UPLOAD YOUR RESULTS Example:
@@ -183,7 +165,7 @@ class QmentaSdkToolMakerExample(Tool):
         context.upload_file(
             source_file_path=t1_path,  # path to the output file in Docker container
             destination_path="T1_final.nii.gz",  # path of the file saved in the output container in the platform
-            modality=str(Modality.DTI),  # modality that will be set for that file
+            modality=str(Modality.T1),  # modality that will be set for that file
         )
         context.set_metadata_value(key="metadata_key", value=100)  # metadata value added to the session metadata
         # ================##
@@ -211,12 +193,8 @@ class QmentaSdkToolMakerExample(Tool):
         # The button label is defined because this element goes into a Tab element. The tab's "button_label" property
         # is a label that will appear to select between different viewer elements in the platform.
 
-        html_online = HtmlInject(width="100%", region=Region.center, button_label="Report")
-        html_online.add_html(file="online_report.html")
-        result_conf.add_visualization(new_element=html_online)
-
         # Remember to add the button_label in the child objects of the tab.
-        tab_1 = Tab(children=[split_1, html_online])
+        tab_1 = Tab(children=[split_1])
         # Call the function generate_results_configuration_file to create the final object that will be saved in the
         # tool path
         result_conf.generate_results_configuration_file(
