@@ -184,21 +184,10 @@ class QmentaSdkToolMakerExample(Tool):
         papaya_1.add_file(file="T1_final.nii.gz", coloring=Coloring.grayscale)
         # Add the papaya element as a visualization in the results configuration object.
         result_conf.add_visualization(new_element=papaya_1)
-
-        # To create a split, specify which ones are the objects to be shown in the split
-        split_1 = Split(
-            orientation=OrientationLayout.vertical, children=[papaya_1],
-            button_label="Images"
-        )
-        # The button label is defined because this element goes into a Tab element. The tab's "button_label" property
-        # is a label that will appear to select between different viewer elements in the platform.
-
-        # Remember to add the button_label in the child objects of the tab.
-        tab_1 = Tab(children=[split_1])
         # Call the function generate_results_configuration_file to create the final object that will be saved in the
         # tool path
         result_conf.generate_results_configuration_file(
-            build_screen=tab_1, tool_path=self.tool_path, testing_configuration=False
+            build_screen=papaya_1, tool_path=self.tool_path, testing_configuration=False
         )
 
 def run(context):
