@@ -1,0 +1,567 @@
+
+    <!doctype html>
+
+    <html>
+
+      <head>
+        <meta charset="utf-8">
+
+        <style type="text/css" media="screen">
+        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Roboto&display=swap');
+
+        
+table, tr, td, th, tbody, thead, tfoot {
+    page-break-inside: avoid !important;
+}
+
+.online_h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+.pdf_h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.online_h2 {
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    margin-top: 14px !important;
+    color: #292929 !important;
+    margin-bottom: 7px !important;
+}
+.pdf_h2 {
+    font-size: 26px;
+    font-weight: 400;
+    margin-top: 14px;
+    color: #292929 !important;
+    margin-bottom: 7px;
+}
+
+.online_h3 {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    margin-top: 12px !important;
+    color: #292929 !important;
+    margin-bottom: 6px !important;
+}
+.pdf_h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 12px;
+    color: #292929 !important;
+    margin-bottom: 6px;
+}
+
+.online_h1, .online_h2, .online_h3, .pdf_h1, .pdf_h2, .pdf_h3 {
+    font-family: "Nunito Sans";
+}
+
+.online_p {
+     font-family: Roboto !important;
+     color: #292929 !important;
+     margin-top: 6px;
+     margin-bottom: 6px;
+     font-size: 13px;
+     font-weight: 400;
+}
+.pdf_p {
+     font-family: Roboto !important;
+     color: #292929 !important;
+     margin-top: 6px;
+     margin-bottom: 6px;
+     font-size: 13px;
+     font-weight: 400;
+}
+
+.online_table_with_data {
+    font-family: Roboto  !important;
+    border-collapse: collapse;
+    color: #292929;
+    margin-bottom: 5px;
+}
+.pdf_table_with_data {
+    font-family: Roboto  !important;
+    width: 100%;
+    border-collapse: collapse;
+    color: #292929;
+    margin-bottom: 5px;
+    margin-top: 16px;
+}
+
+.online_table_with_data tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.pdf_table_with_data tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.online_table_with_data th {
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    border-top: #3391A3;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px;
+}
+.pdf_table_with_data th {
+    white-space: nowrap;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    border-top: #3391A3;
+    font-size: 20px;
+    font-weight: 700;    
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.online_table_with_data td {
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    color: #292929;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 6px;
+}
+.pdf_table_with_data td {
+    text-align: left;
+    border: 1px solid #e0e0e0;
+
+    color: #292929;
+    font-size: 18px;
+    font-weight: 400;
+
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.online_table_caption {
+    font-family: Roboto !important;
+    font-size: 12px;  /* default size in platform is 12px */
+
+    line-height: 12px;
+    letter-spacing: 0em;
+
+    color: #292929;
+    margin-bottom: 35px;
+}
+.pdf_table_caption {
+    font-family: Roboto !important;
+    font-size: 16px;  /* default size in platform is 12px */
+
+    line-height: 12px;
+    letter-spacing: 0em;
+
+    color: #292929;
+    margin-bottom: 25px;
+}
+
+.online_table_with_data .primary_colors {
+    background-color: #3391A3;
+
+    font-weight: 700;
+    color: #fff;
+}
+.pdf_table_with_data .primary_colors {
+    background-color: #3391A3;
+
+    font-weight: 700;
+    color: #fff;
+}
+
+.online_table_with_data .secondary_colors {
+    background-color: #1A7BBC;
+
+    font-weight: 700;
+    color: #fff;
+}
+.pdf_table_with_data .secondary_colors {
+    background-color: #1A7BBC;
+
+    font-weight: 700;
+    color: #fff;
+}
+
+.online_table_with_data .white_cell{
+    background-color: #fff !important;
+    border: 1px solid #ffffff;
+    color: #292929 !important;
+}
+.pdf_table_with_data .white_cell{
+    background-color: #fff !important;
+    border: 1px solid #ffffff;
+    color: #292929 !important;
+}
+
+.online_table_with_data .gray_bg {
+    /* Care Primary Lighter */
+    background-color: #F2F2F2;
+}
+.pdf_table_with_data .gray_bg {
+    /* Care Primary Lighter */
+    background-color: #F2F2F2;
+}
+
+.online_table_with_data .align_left {
+    text-align: left !important;
+}
+.pdf_table_with_data .align_left {
+    text-align: left !important;
+}
+
+.online_table_with_data .align_center {
+    text-align: center !important;
+}
+.pdf_table_with_data .align_center {
+    text-align: center !important;
+}
+
+.online_table_with_data .align_right {
+    text-align: right !important;
+}
+.pdf_table_with_data .align_right {
+    text-align: right !important;
+}
+
+
+.online_table_with_data_transposed {
+    font-family: Roboto  !important;
+    border-collapse: collapse;
+    color: #292929;
+    margin-bottom: 5px;
+    width:75%; table-layout:fixed;
+}
+.pdf_table_with_data_transposed {
+    font-family: Roboto  !important;
+    width:95%; table-layout:fixed;
+    border-collapse: collapse;
+    color: #292929;
+    margin-bottom: 5px;
+    margin-top: 16px;
+}
+
+.online_table_with_data_transposed tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.pdf_table_with_data_transposed tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.online_table_with_data_transposed th {
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    border-top: #3391A3;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px;
+}
+.pdf_table_with_data_transposed th {
+    white-space: nowrap;
+
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    border-top: #3391A3;
+    font-size: 13px;
+    font-weight: 700;
+    
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.online_table_with_data_transposed td {
+    text-align: left;
+    border: 1px solid #e0e0e0;
+
+    color: #292929;
+    font-size: 13px;
+    font-weight: 400;
+
+    padding: 6px;
+}
+.pdf_table_with_data_transposed td {
+    text-align: left;
+    border: 1px solid #e0e0e0;
+
+    color: #292929;
+    font-size: 13px;
+    font-weight: 400;
+
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.online_table_with_data_transposed td:first-child { 
+    background-color: #3391A3; 
+    font-weight: 700;
+    color: #fff;
+}
+.pdf_table_with_data_transposed td:first-child { 
+    background-color: #3391A3;     
+    font-weight: 700;
+    color: #fff;
+}
+
+
+.online_ortho_images {
+    border: 1px solid #e0e0e0;
+    border-collapse: collapse;
+    color: #292929;
+    margin-bottom: 5px;
+}
+.pdf_ortho_images {
+    border: 1px solid #e0e0e0;
+    width: 100%;
+    border-collapse: collapse;
+    color: #292929;
+    margin-bottom: 5px;
+}
+
+.online_ortho_images th {
+    font-family: Roboto;
+    height: 15px !important;
+    color: #292929;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+
+    background-color: #F2F2F2;
+    border-bottom: 1px solid #e0e0e0;
+
+    padding: 6px;
+}
+.pdf_ortho_images th {
+    font-family: Roboto;
+    height: 15px !important;
+    color: #292929;
+
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+
+    background-color: #F2F2F2;
+    border-bottom: 1px solid #e0e0e0;
+
+    padding: 6px;
+}
+
+.online_ortho_images td {
+    padding: 6px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+.pdf_ortho_images td {
+    padding: 6px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.online_single_image img {
+   height: 100%;
+   width: 100%;
+}
+.pdf_single_image img {
+   width: 350px;
+}
+
+#online_circle {
+  width: 10px;
+  height: 10px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+}
+#pdf_circle {
+  width: 10px;
+  height: 10px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+}
+
+.online_text_legend {
+    font-family: Roboto;
+    color: #292929;
+    font-size: 13px;
+    font-weight: 700;
+    padding-left: 4px;
+}
+.pdf_text_legend {
+    font-family: Roboto;
+    color: #292929;
+    font-size: 13px;
+    font-weight: 700;
+    padding-left: 4px;
+}
+
+.online_vertical_separation {
+    padding-top:10px;
+}
+.pdf_vertical_separation {
+    padding-top:10px;
+}
+
+.page_break {
+    page-break-before: always;
+}
+
+ul ol {
+    margin-left: 5px; 
+    margin-top: 5px; 
+}
+.custom_list_check ul {
+    list-style: none;
+    padding-left: 16px;
+}
+
+.custom_list_check ul li:before {
+    margin-left: 5px; 
+    margin-top: 5px; 
+    content: '✓';
+}
+
+.custom_list_square_cross ul {
+    list-style: none;
+}
+
+.custom_list_square_cross ul li:before {
+    margin-left: 5px; 
+    margin-top: 5px; 
+    content: '⊠';
+}
+
+.custom_list_cross ul {
+    list-style: none;
+}
+
+.custom_list_cross ul li:before {
+    margin-left: 5px; 
+    margin-top: 5px; 
+    content: 'x';
+}
+
+.custom_list_square ul {
+    list-style: none;
+}
+
+.custom_list_square ul li:before {
+  content: '□';
+}
+
+#footer_table {
+    width:100%;
+    border-collapse: collapse;
+    border-top: 1px solid #3391a3;
+}
+
+#footer_table td{
+    padding:7px 0px;
+}
+
+#footer_table .footer_table_logo {
+   width: 5%;
+}
+
+#footer_table .footer_table_logo > img {
+   height: 24px;
+   vertical-align: bottom;
+}
+
+#footer_table .footer_table_address {
+    width:32%;
+    font-family: Roboto;
+    font-size: 10px;
+    color: #666666;
+}
+
+#footer_table .space_numeration {
+    width:10%;
+}
+
+#footer_table .footer_table_warning {
+    width:40%;
+    text-align:right;
+    font-family: Roboto;
+    font-size: 11px;
+    color: #666666;
+}
+
+#headers_table table{
+    width: 100%;
+    font-family: Roboto;
+}
+
+#header_table_title_logo .date_creation {
+    text-align: left;
+    color: #292929;
+    font-size: 13px;
+}
+
+#header_table_title_logo .logo_qmenta {
+    text-align: right;
+}
+#header_table_title_logo .logo_qmenta img {
+    width: 153px;
+}
+
+.report_title_header {
+    margin: auto;
+}
+
+#header_table_analysis_data {
+    border-collapse: collapse;
+    border: 1px solid #e0e0e0;
+    margin-top: 25px;
+    font-size: 14px;
+    font-style: normal;
+    text-align: left;
+}
+#header_table_analysis_data th {
+    font-weight: 400;
+    padding: 6px;
+    line-height: 14px;
+
+    /* or 175% */
+    text-transform: uppercase;
+    color: #666666;
+}
+
+#header_table_analysis_data td {
+    font-style: normal;
+    font-weight: 700;
+    padding: 6px;
+
+    /* or 133% */
+    text-transform: capitalize;
+    /* Dark */
+    color: #292929;
+}
+
+.online_table_transposed_data {
+}
+.pdf_table_transposed_data {
+}
+
+
+
+        </style>
+
+      </head>
+
+      <body>
+
+      <h1 class="online_h1">Qmenta sdk tool maker example</h1><table class="online_table_with_data"><tr><th class="primary_colors" colspan="1">histogram</th></tr><tr><td class="gray_bg"><div class="align_center"></div></td></tr><tr><td class="align_center"><img src="hist.png" /></td></tr></table><div class="online_table_caption">Fifth table comparison with primary colors and images</div>
+
+      </body>
+
+    </html>
+    
