@@ -15,14 +15,6 @@
         "orientation": "vertical",
         "type": "split",
         "button_label": "Images"
-      },
-      {
-        "type": "tool",
-        "tool": "html_inject",
-        "region": "center",
-        "width": "100%",
-        "button_label": "Report",
-        "load_element": 2
       }
     ]
   },
@@ -38,13 +30,6 @@
           }
         ],
         "title": "Tissue segmentation over T1"
-      }
-    },
-    {
-      "type": "tool",
-      "tool_code": "html_inject",
-      "config": {
-        "file": "online_report.html"
       }
     }
   ]
