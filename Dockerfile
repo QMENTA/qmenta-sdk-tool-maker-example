@@ -22,6 +22,7 @@ RUN pip install -r ${WORKDIR}/requirements.txt
 RUN mkdir -p ${WORKDIR}/
 COPY tool.py ${WORKDIR}/tool.py
 COPY report_template.html ${WORKDIR}/report_template.html
+COPY qmenta_logo.png ${WORKDIR}/qmenta_logo.png
 
 # Configure entrypoint
 RUN ln -fs /usr/bin/python3 /usr/bin/python \
