@@ -1,22 +1,10 @@
 {
   "screen": {
-    "type": "tab",
-    "children": [
-      {
-        "children": [
-          {
-            "type": "tool",
-            "tool": "papaya",
-            "region": "center",
-            "width": "50%",
-            "load_element": 1
-          }
-        ],
-        "orientation": "vertical",
-        "type": "split",
-        "button_label": "Images"
-      }
-    ]
+    "type": "tool",
+    "tool": "papaya",
+    "region": "center",
+    "width": "50%",
+    "load_element": 1
   },
   "tools": [
     {

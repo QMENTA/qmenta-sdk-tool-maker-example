@@ -189,6 +189,9 @@ class QmentaSdkToolMakerExample(Tool):
             build_screen=papaya_1, tool_path=self.tool_path, testing_configuration=False
         )
 
+        return result_conf
+
+
 def run(context):
     QmentaSdkToolMakerExample().tool_outputs()  # this can be removed if no results configuration file needs to be generated.
     QmentaSdkToolMakerExample().run(context)
