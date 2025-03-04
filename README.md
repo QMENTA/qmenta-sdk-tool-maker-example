@@ -28,10 +28,15 @@ This tool code uses this HTML template to populate some fields with the patient 
 ### Local folder
 
 This folder includes the files to test the tool locally before creating the docker and adding it to the platform.
-For testing modify the `/local/test/test_tool.py`, add your data in the `/local/test/sample_data` and then run:
+For testing modify the `/local/test/test_tool.py`, add your data in the `/local/test/sample_data`.
+
+To run the local testing, move the repository inside a folder called `local_tools/` and rename it using underscore instead 
+of dashes. Then enter a terminal in its parent folder.
+For instance, if you have this path: /home/user/dev/local_tools/qmenta_sdk_tool_maker_example
+run the following:
 ~~~~
-cd /local/test/
-pytest test_tool.py::TestTool::test_basic_call
+cd /home/user/dev/
+pytest /home/user/dev/local_tools/qmenta_sdk_tool_maker_example/local/test/test_tool.py::TestTool::test_basic_call
 ~~~~
 
 ## Build the tool image
