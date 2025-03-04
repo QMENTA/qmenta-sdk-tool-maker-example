@@ -32,7 +32,7 @@ For testing modify the `/local/test/test_tool.py`, add your data in the `/local/
 
 To run the local testing, move the repository inside a folder called `local_tools/` and rename it using underscore instead 
 of dashes. Then enter a terminal in its parent folder.
-For instance, if you have this path: /home/user/dev/local_tools/qmenta_sdk_tool_maker_example
+For instance, if you have this path: `/home/user/dev/local_tools/qmenta_sdk_tool_maker_example`
 run the following:
 ~~~~
 cd /home/user/dev/
