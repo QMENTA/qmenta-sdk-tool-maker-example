@@ -31,7 +31,7 @@ Feel free to contact us if you have any doubt or request at sdk@qmenta.com! We a
 
 This tool code uses this HTML template to populate some fields with the patient data and the analysis results to generate a PDF report.
 
-### Local folder
+### Local test folder
 
 This folder includes the files to test the tool locally before creating the docker and adding it to the platform.
 For testing modify the `/local/test/test_tool.py`, add your data in the `/local/test/sample_data`.
@@ -46,35 +46,37 @@ cd /home/user/dev/qmenta-sdk-tool-maker-example/
 pytest /home/user/dev/qmenta-sdk-tool-maker-example/local_tools/tool_id/local/test/test_tool.py::TestTool::test_basic_call
 ~~~~
 
-## Build the tool image
+More information about local testing can be found in the [SDK Documentation](https://docs-dev.qmenta.com/sdk/guides_docs/tool_maker.html#local-testing-guidelines)
 
-Use [Docker](https://www.docker.com/get-docker) to build a new image using the Dockerfile:
+## Running the test with Docker
+
+You need an account and a repository in [Docker](https://www.docker.com/get-docker) to build a new image using the Dockerfile.
+Make sure the service is started and login to Docker:
 ~~~~
-docker build -t image_name .
+sudo systemctl start docker
+docker login
 ~~~~
-Where `image_name` should conform to the syntax `my_username/my_tool:version`.
 
-> The first build may take several minutes since it will need to generate the image layer containing the software installation.
+Then you can run the local test. The input and output folders of the local test are going to be reused because the tests
+have the same name (test_basic_call()). If you want to have a separated folder, create the folder 
+structure and use a different method name. Run the test as previously:
 
-Alternatively, take a look at the `standalone.Dockerfile` to see how to install the SDK in an image based on Ubuntu.
-
-## Test the tool locally
-
-Optionally, the `test_tool.py` script can be used to locally launch your tool image if you specify the input files and the required values for you settings (see `mock_settings_values.json`):
 ~~~~
-mkdir analysis_output
-
-python test_tool.py image_name example_data analysis_output \
-    --settings settings.json \
-    --values mock_settings_values.json
+pytest /home/user/dev/qmenta-sdk-tool-maker-example/local_tools/tool_id/local/test/test_tool.py::TestToolDocker::test_basic_call
 ~~~~
+
+If everything ran correctly, the docker image should be created. Check it by using the command `docker images`.
+Apply proper tagging to the docker image and push it to your repository:
+
+~~~~
+docker tag tool_id:1.0 my_docker_user/tool_id:1.0
+docker push my_docker_user/tool_id:1.0
+~~~~
+
+More information about Docker local testing can be 
+found in the [SDK Documentation](https://docs-dev.qmenta.com/sdk/guides_docs/tool_maker.html#test-in-docker-container)
 
 ## Add the tool to the [QMENTA platform](https://platform.qmenta.com/)
 
-To add a tool image to your list of tools you will first need to login push it to your [Docker Hub](https://hub.docker.com/) registry:
-~~~~
-docker login
-
-docker push image_name
-~~~~
-To register the tool to the [QMENTA platform](https://platform.qmenta.com/), access the Analysis menu, and go to My Tools. You will need to enter your credentials of your registry, the name and a version number for the tool, its settings configuration file and a description. You can find an example of the settings configuration file in this repository (`settings.json`).
+More information about adding a tool to the QMENTA Platform can be 
+found in the [SDK Documentation](https://docs-dev.qmenta.com/sdk/guides_docs/tool_maker.html#integrate-your-tool-in-the-qmenta-platform)
