@@ -4,6 +4,12 @@ This is an example a tool that can be created with the new Qmenta tool maker. Cl
 
 > In order to add tools to the [QMENTA platform](https://platform.qmenta.com/) you need to have **developer privileges**. If you are interested in this feature, please contact us at info@qmenta.com.
 
+Here you can find an example of:
+
+- Template tool: What is created by the Tool Maker automatically (qmenta-sdk-lib==1.16.1.dev3435)
+- Simple tool 1: first example tool.
+- Simple tool 2: second example tool
+
 ## Contents
 ### Dockerfile
 
@@ -28,10 +34,15 @@ This tool code uses this HTML template to populate some fields with the patient 
 ### Local folder
 
 This folder includes the files to test the tool locally before creating the docker and adding it to the platform.
-For testing modify the `/local/test/test_tool.py`, add your data in the `/local/test/sample_data` and then run:
+For testing modify the `/local/test/test_tool.py`, add your data in the `/local/test/sample_data`.
+
+To run the local testing, move to the repository main where the folder called `local_tools/` is located.
+
+For instance, if you have this path: `/home/user/dev/qmenta-sdk-tool-maker-example/local_tools/tool_id`
+run the following:
 ~~~~
-cd /local/test/
-pytest test_tool.py::TestTool::test_basic_call
+cd /home/user/dev/qmenta-sdk-tool-maker-example/
+pytest /home/user/dev/qmenta-sdk-tool-maker-example/local_tools/tool_id/local/test/test_tool.py::TestTool::test_basic_call
 ~~~~
 
 ## Build the tool image

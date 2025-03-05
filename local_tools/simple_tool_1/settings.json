@@ -1,0 +1,69 @@
+[
+  {
+    "id": "input_t1",
+    "type": "container",
+    "file_filter": "c_t1[1,1](m'T1')",
+    "title": "Input T1 data",
+    "info": "Requires a T1 image.",
+    "in_filter": [
+      "mri_brain_data"
+    ],
+    "out_filter": [],
+    "anchor": 1,
+    "batch": 1,
+    "mandatory": 1
+  },
+  {
+    "type": "line"
+  },
+  {
+    "type": "info",
+    "content": "Parameters of the tool"
+  },
+  {
+    "id": "perform_operation_1",
+    "type": "checkbox",
+    "title": "Perform operation?",
+    "default": 1
+  },
+  {
+    "type": "indent",
+    "content": "Choice parameters:"
+  },
+  {
+    "id": "int_1",
+    "type": "integer",
+    "title": "First",
+    "default": 32,
+    "min": 0,
+    "max": 100
+  },
+  {
+    "id": "int_2",
+    "type": "integer",
+    "title": "Second",
+    "default": 10,
+    "min": 0,
+    "max": 100
+  },
+  {
+    "type": "indent",
+    "content": "Select operation."
+  },
+  {
+    "id": "operation",
+    "type": "single_choice",
+    "title": "Single choice type description (add or multiply)",
+    "options": [
+      [
+        "add",
+        "Add"
+      ],
+      [
+        "mult",
+        "Multiplication"
+      ]
+    ],
+    "default": "mult"
+  }
+]

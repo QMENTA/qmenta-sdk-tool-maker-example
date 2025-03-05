@@ -1,0 +1,105 @@
+[
+  {
+    "id": "input_data",
+    "type": "container",
+    "file_filter": "condition_t1_brain[1,1]((m'T1',t'brain'))",
+    "title": "Title of the setting",
+    "info": "Describe here what is the expected input, this will appear in the tool UI.",
+    "in_filter": [
+      "mri_brain_data"
+    ],
+    "out_filter": [
+      "freesurfer_v5",
+      "freesurfer_v6"
+    ],
+    "anchor": 1,
+    "batch": 1,
+    "mandatory": 1
+  },
+  {
+    "type": "indent",
+    "content": "Parameters of the tool are accessed using the variable self.inputs.id_"
+  },
+  {
+    "id": "ex_checkbox",
+    "type": "checkbox",
+    "title": "Checkbox setting type description",
+    "default": 0
+  },
+  {
+    "id": "some_string",
+    "type": "string",
+    "title": "String type description",
+    "default": "TOOL"
+  },
+  {
+    "id": "some_integer",
+    "type": "integer",
+    "title": "Integer type description",
+    "default": 3,
+    "min": 0,
+    "max": 10
+  },
+  {
+    "type": "line"
+  },
+  {
+    "id": "some_decimal",
+    "type": "decimal",
+    "title": "Decimal type description",
+    "default": 3.14,
+    "min": 0.1,
+    "max": 4.3
+  },
+  {
+    "type": "heading",
+    "content": "Choice settings:"
+  },
+  {
+    "type": "info",
+    "content": "In the options, the first element in the list of tuples is the value representation that the tool handles, the second element is the string shown in the platform for humans to select."
+  },
+  {
+    "id": "one_choice",
+    "type": "single_choice",
+    "title": "Single choice type description",
+    "options": [
+      [
+        "a",
+        "Option A"
+      ],
+      [
+        "b",
+        "Option B"
+      ],
+      [
+        "c",
+        "Option C"
+      ]
+    ],
+    "default": "b"
+  },
+  {
+    "id": "multi_choice",
+    "type": "multiple_choice",
+    "title": "Multiple choice type description",
+    "options": [
+      [
+        "a",
+        "Option A"
+      ],
+      [
+        "b",
+        "Option B"
+      ],
+      [
+        "c",
+        "Option C"
+      ]
+    ],
+    "default": [
+      "a",
+      "b"
+    ]
+  }
+]
