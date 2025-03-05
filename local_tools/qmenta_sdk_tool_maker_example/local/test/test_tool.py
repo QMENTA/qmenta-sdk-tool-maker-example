@@ -5,7 +5,7 @@ import os
 from qmenta.sdk.tool_maker.context import TestFileInput
 from qmenta.sdk.tool_maker.modalities import Modality, Tag
 import sys
-sys.path.append("local_tools")
+sys.path.append("../../")
 from qmenta_sdk_tool_maker_example.tool import QmentaSdkToolMakerExample
 
 

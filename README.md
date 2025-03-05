@@ -40,6 +40,7 @@ To run the local testing, move to the repository main where the folder called `l
 
 For instance, if you have this path: `/home/user/dev/qmenta-sdk-tool-maker-example/local_tools/tool_id`
 run the following:
+
 ~~~~
 cd /home/user/dev/qmenta-sdk-tool-maker-example/
 pytest /home/user/dev/qmenta-sdk-tool-maker-example/local_tools/tool_id/local/test/test_tool.py::TestTool::test_basic_call
