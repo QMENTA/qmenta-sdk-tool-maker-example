@@ -148,7 +148,7 @@ class TemplateToolMaker(Tool):
         context.upload_file(
             source_file_path=result_file,  # path to the output file in Docker container
             destination_path="T1_final.nii.gz",  # path of the file saved in the output container in the platform
-            modality=str(Modality.DTI),  # modality that will be set for that file
+            modality=str(Modality.DTI.value),  # modality that will be set for that file
             tags={"eddy"}  # tags that will be set for that file
         )
         context.set_metadata_value(key="metadata_key", value=100)  # metadata value added to the session metadata

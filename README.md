@@ -4,9 +4,12 @@ This is an example a tool that can be created with the new Qmenta tool maker. Cl
 
 > In order to add tools to the [QMENTA platform](https://platform.qmenta.com/) you need to have **developer privileges**. If you are interested in this feature, please contact us at info@qmenta.com.
 
+We recommend to use the latest QMENTA SDK Lib version, please check the [QMENTA Python SDK Release history](https://pypi.org/project/qmenta-sdk-lib/#history)
+
 Here you can find an example of:
 
-- Template tool: What is created by the Tool Maker automatically (qmenta-sdk-lib==1.16.1.dev3435)
+- 
+- Template tool: What is created by the Tool Maker automatically (we recommend to use the latest QMENTA SDK Lib version)
 - Simple tool 1: first example tool.
 - Simple tool 2: second example tool
 
