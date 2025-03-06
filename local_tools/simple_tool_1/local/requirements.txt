@@ -1,3 +1,3 @@
 # Python requirements for tool:
 # Ex: matplotlib==3.4.2
-qmenta-sdk-lib==1.16.1.dev3432
+qmenta-sdk-lib==1.16.1.dev3440
