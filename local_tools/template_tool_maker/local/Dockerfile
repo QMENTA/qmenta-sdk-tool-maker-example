@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-ENV WORKDIR "/qmenta/"
+ENV WORKDIR "/root/"
 
 RUN apt-get update
 RUN apt-get install -y python3-pip python-dev build-essential
