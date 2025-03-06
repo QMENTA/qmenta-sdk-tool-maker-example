@@ -134,14 +134,14 @@ class SimpleTool1(Tool):
         context.upload_file(
             source_file_path=t1_path,  # path to the output file in Docker container
             destination_path=os.path.basename(t1_path),  # path of the file saved in the output container in the platform
-            modality=str(Modality.DTI),  # modality that will be set for that file
+            modality=t1_modality,  # modality that will be set for that file
             tags={"input"}  # tags that will be set for that file
         )
         context.set_progress(message="Uploading result")
         context.upload_file(
             source_file_path=result_file,  # path to the output file in Docker container
             destination_path=os.path.basename(result_file),  # path of the file saved in the output container in the platform
-            modality=str(Modality.T1),  # modality that will be set for that file
+            modality=str(Modality.T1.value),  # modality that will be set for that file
             tags={"output"}  # tags that will be set for that file
         )
         context.upload_file(
@@ -164,12 +164,12 @@ class SimpleTool1(Tool):
 
         # Add as many layers as you want, they are going to be loaded in the order that you add them.
         papaya_1.add_file(file="t'input'", coloring=Coloring.grayscale)  # using the file name
-        papaya_1.add_file(file="t'output'", coloring=Coloring.custom)
+        # papaya_1.add_file(file="t'output'", coloring=Coloring.custom)
         # Add the papaya element as a visualization in the results configuration object.
         result_conf.add_visualization(new_element=papaya_1)
 
         html_online = HtmlInject(width="100%", region=Region.center, button_label="Report")
-        html_online.add_html(file="t'report'")
+        html_online.add_html(file="online_report.html")
         result_conf.add_visualization(new_element=html_online)
 
         # Remember to add the button_label in the child objects of the tab.

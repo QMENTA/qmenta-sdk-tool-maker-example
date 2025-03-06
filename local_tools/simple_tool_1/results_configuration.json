@@ -29,10 +29,6 @@
           {
             "file": "t'input'",
             "coloring": "Grayscale"
-          },
-          {
-            "file": "t'output'",
-            "coloring": "custom"
           }
         ],
         "title": "Tissue segmentation over T1"
